@@ -1,0 +1,16 @@
+{% extends "main.html" %}
+{% block title %}Home{% endblock %}
+{% block body %}
+
+
+{% if request.session.name.username %}
+<p>You're logged in already! <a href="/portal">go back</a> </p>
+{% else %}
+<form action="login" method="POST" >
+    {% csrf_token %}
+  <input class="form-control" type="username" name="username" placeholder="Username">
+  <input class="form-control" type="password" name="password" placeholder="Password">
+  <input class="form-control" type="submit" value="Log in">
+</form>
+{% endif %}
+{% endblock %}

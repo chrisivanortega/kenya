@@ -1,0 +1,63 @@
+
+
+{% extends "main.html" %}
+{% block title %}Registros{% endblock %}
+{% block body %}
+
+
+
+<ul class="nav">
+    <li class="nav-item">
+        <a class="nav-link" href="logout">Salir</a>
+    </li>
+    <li class="nav-item">
+        <a target="_blank" class="nav-link" href="admins?accion=generarxml">Generar XML</a>
+    </li>
+
+</ul>
+
+<table class="table table-sm">
+        {% if registros %}
+        <tr>
+            <th>Nombre</th>                                    
+            <th>nocontrol</th>
+            <th>carrera</th>
+            <th>correo</th>
+            <th>fecha</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+        
+        {% for row in registros %}
+        <tr>
+            <td> {{ row.nombre }}</td>                              
+            <td> {{ row.nocontrol }}</td>            
+            <td> {{ row.carrera }}</td>
+            <td> {{ row.correo }}</td>
+            <td> {{ row.fecha }}</td>
+            <td> {{ row.marcado }}</td>
+            
+            
+            <td>
+                <!--<a href="/admin?accion=crear&id={{row.id}}&nombre={{row.nombre}}" class="text-primary" id="{{row.id}}">generar</a>-->
+                <a href="admins?accion=borrar&id={{row.id}}" class="text-danger" id="{{row.id}}">Borrar</a>
+                <!--<a href="#" id="confirmar" class="text-primary" para="{{row.correo}}" idd="{{row.id}}">Confirmar</a>-->
+                <a target="_blank" class="nav-link" href="admins?accion=generarpdf&idd={{row.id}}">Generar PDF</a>
+                </td>
+        </tr>
+        {% endfor %}
+        {% endif %}
+    </table>
+    <script>
+    ///
+        $("#confirmar").click(function(){
+            var nuevoCorreo = prompt("Cual es el correo generado?")
+            var id = $(this).attr("idd")
+            var para = $(this).attr("para")
+            window.location.href = "admins?accion=marcar&id="+id+"&nuevoCorreo="+nuevoCorreo+"&para="+para;
+
+        })
+
+    </script>
+
+{% endblock %}

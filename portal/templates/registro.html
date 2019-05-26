@@ -1,0 +1,70 @@
+
+
+{% extends "main.html" %}
+{% block title %}Home{% endblock %}
+{% block body %}
+    <div class="row">
+    <div class="col-md-12">
+            {% if resultado %}
+                <div class="alert alert-{{bcolor}}" role="alert">
+                    {{resultado}}
+                </div>
+            {% endif %}        
+        </div>
+        <div class="col-md-12">
+            <h2>Registro</h2>
+        </div>
+        <div class="col-md-12">
+            <form method="POST" action="">
+                    {% csrf_token %}
+            <div class="form-group">
+                <label for="exampleInputEmail1">Nombre</label>
+                <input type="text" name="nombre" class="form-control" id="" aria-describedby="emailHelp" placeholder="Nombre De Usuario">                
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Correo de Confirmacion</label>
+                <input type="email" name="correo" class="form-control" id="" aria-describedby="emailHelp" placeholder="Correo de Confirmacion">                
+            </div>            
+            <div class="form-group">
+                <label for="exampleInputPassword1">Carrera</label>
+                <input type="text" name="carrera" class="form-control" id="" aria-describedby="emailHelp" placeholder="Carrera">                
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">No. De Control</label>
+                <input type="text" name="nocontrol" class="form-control" id="" aria-describedby="emailHelp" placeholder="No. De Control">                
+            </div>
+      
+
+        <button type="submit" class="btn btn-primary">Enviar Solicitud</button>
+    </form>
+    
+    </div>
+    <!--
+    <div class="col-md-6">
+        <h5>Registros</h5>
+        <table class="table">
+            {% if registros %}
+            <tr>
+                <th>Nombre</th>
+                <th>carrera</th>
+                <th>fecha</th>
+                
+            </tr>
+            
+            {% for row in registros %}
+            <tr>
+                <td> {{ row.nombre }}</td>
+                <td> {{ row.carrera }}</td>
+                <td> {{ row.fecha }}</td>
+                
+            </tr>
+            {% endfor %}
+            {% endif %}
+        </table>        
+    </div>
+    -->
+    <div class="col-md-12"><br></div>
+
+
+
+{% endblock %}
