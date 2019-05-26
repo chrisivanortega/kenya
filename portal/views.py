@@ -36,6 +36,7 @@ def registro(request):
         r.carrera = carrera
         r.nocontrol = nocontrol
         r.save()
+        return render(request, 'registrado.html',{})
     return render(request, 'registro.html',{})
 
 
@@ -436,7 +437,11 @@ def admins(request):
     if action == 'generarxml':        
         qs_json = []
         for q in registros:
-            qs_json.append(q.nombre)
+            qs_json.append({
+                "name":q.nombre,
+                "nocontrol":q.nocontrol,
+                "carrera":q.carrera
+            })
         
         xml = dicttoxml(qs_json, custom_root='registros', attr_type=False)
         return HttpResponse(xml, content_type='text/xml')
