@@ -51,17 +51,25 @@
   
         <nav class="my-2 my-md-0 mr-md-3">
                 <a class="p-2 text-dark" href="/portal">Home</a>
-                <a class="p-2 text-dark" href="registro">Registro</a>
+                <a class="p-2 text-dark" href="/portal/registro">Registro</a>
+                
                 {% if request.session.name.username %}
-                    <a class="p-2 text-dark" href="logout">Logout</a>
+                <a class="p-2 text-dark" href="/portal/admins">Admin</a>
+                
+                    
                 {% else %}                
-                    <a class="p-2 text-dark" href="login">Login</a>                    
+                
                 {% endif %}
                 
               </nav>
 
   
-  <a class="btn btn-outline-primary" href="login">Sign up</a>
+             {% if request.session.name.username %}
+              <a class="btn btn-outline-warning" href="/portal/logout">Salir</a>
+                
+  {% else %}       
+  <a class="btn btn-outline-primary" href="/portal/login">Entrar</a>
+  {% endif %}
 </div>
 
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
