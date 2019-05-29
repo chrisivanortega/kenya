@@ -85,9 +85,9 @@ DATABASES = {
         # database name.
         'NAME': 'kenya',
         # user name.
-        'USER': 'root',
+        'USER': 'kenya',
         # password
-        'PASSWORD': 'Montest1!',
+        'PASSWORD': 'ochoas112233!!M',
         # connect options
         'OPTIONS': {'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",},
     }

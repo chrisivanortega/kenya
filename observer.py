@@ -1,4 +1,4 @@
-#!/home/servidor/env/bin/python2.7
+#!/home/kenya/env/bin/python2.7
 ########### OBSERVER 1 ################################### THIS PROCCESS WILL WATCH FOR NEW EMAIL REQUESTS ##################
 
 
@@ -104,13 +104,14 @@ class Obsr:
         """ % (sent_from, ", ".join(to), subject, body)
 
         try:  
-            server = smtplib.SMTP_SSL('smtp.gmail.com', 587)
-            server.ehlo()
-            server.login(gmail_user, gmail_password)
-            resp = server.sendmail(sent_from, to, email_text)
-            server.close()
+		server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
+		server.ehlo()
+	
+		server.login(gmail_user, gmail_password)
+		resp = server.sendmail(sent_from, to, email_text)
+		server.close()
 
-            return str(resp)
+		return str(resp)
         except Exception,e:  
             return str(e)
 
@@ -123,7 +124,7 @@ class Obsr:
 if __name__ == "__main__":
 	while(True):
 	    # create connection
-		obr = Obsr(username = "root", password = "toor",server = "localhost",database = "kenya")
+		obr = Obsr(username = "kenya", password = "ochoas112233!!M",server = "localhost",database = "kenya")
 		obr.dbconnection()
 		rpnedings = obr.getPendings()
 		print "executing " + str(len(rpnedings))
@@ -132,11 +133,11 @@ if __name__ == "__main__":
 		"""
 		for r in rpnedings:
 			resp = obr.send_email(to = r[7],subject = "Tu solicitud de correo ha sido aceptada", text = textemail)
-            print resp
+                        print resp
 			if resp:
 				obr.marcarComoCreado(r[0])	
-        print "finzalizado"
-        obr.mydb.close()
+                print "finzalizado"
+                obr.mydb.close()
 		time.sleep(60) # se va a dormir cada 60 segundos
 
 
