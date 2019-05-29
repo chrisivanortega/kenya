@@ -18,7 +18,7 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
- 
+from datetime import datetime, timedelta
 
 
 def index(request):
@@ -33,12 +33,17 @@ def registro(request):
         nocontrol = request.POST.get('nocontrol')
         r.nombre = nombre
         r.correo = correo
+        r.fecha = datetime.now()
         r.carrera = carrera
         r.nocontrol = nocontrol
         r.save()
         return render(request, 'registrado.html',{})
     return render(request, 'registro.html',{})
 
+def registros(request):
+    registros = Registro.objects.filter().order_by('-fecha')
+
+    return render(request, 'registros.html', {"registros":registros})
 
 def login(request):
     
@@ -57,7 +62,7 @@ def logout(request):
     
 @user_is_entry_author
 def admins(request):
-    registros = Registro.objects.filter()
+    
     action = request.GET.get('accion')
     if  action == 'borrar':
         id = request.GET.get("id") 
@@ -441,6 +446,7 @@ def admins(request):
 
     if action == 'generarxml':        
         qs_json = []
+        registros = Registro.objects.filter()
         for q in registros:
             qs_json.append({
                 "name":q.nombre,
@@ -451,4 +457,4 @@ def admins(request):
         xml = dicttoxml(qs_json, custom_root='registros', attr_type=False)
         return HttpResponse(xml, content_type='text/xml')
 
-    return render(request, 'admin.html', {"registros":registros})
+    return render(request, 'admin.html')

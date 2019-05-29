@@ -1,0 +1,40 @@
+<table class="table table-sm">
+        {% if registros %}
+        <tr>
+            <th>Nombre</th>                                    
+            <th>nocontrol</th>
+            <th>carrera</th>
+            <th>correo</th>
+            <th>fecha</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+        
+        {% for row in registros %}
+        <tr>
+            <td> {{ row.nombre }}</td>                              
+            <td> {{ row.nocontrol }}</td>            
+            <td> {{ row.carrera }}</td>
+            <td> {{ row.correo }}</td>
+            <td> {{ row.fecha }}</td>
+            <td> 
+                
+
+                {% if row.marcado  == 'True' %}
+                    <i class="fa fa-check text-success" aria-hidden="true"></i>
+
+                {% else %}
+                    <i class="fa fa-exclamation text-secondary faa-flash animated" aria-hidden="true"></i>
+                {% endif %}
+
+            </td>
+            
+            
+            <td>            
+            <a href="admins?accion=borrar&id={{row.id}}" class="text-danger" id="{{row.id}}"><i class="fas fa-trash-alt" title="borrar"></i></a>
+            <a target="_blank"  href="admins?accion=generarpdf&idd={{row.id}}"><i class="fas fa-file-pdf" title="generar pdf"></i></a>
+            </td>
+        </tr>
+        {% endfor %}
+        {% endif %}
+    </table>

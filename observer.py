@@ -136,6 +136,7 @@ if __name__ == "__main__":
 			if resp:
 				obr.marcarComoCreado(r[0])	
         print "finzalizado"
+        obr.mydb.close()
 		time.sleep(60) # se va a dormir cada 60 segundos
 
 

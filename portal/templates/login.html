@@ -4,7 +4,7 @@
 
 
 {% if request.session.name.username %}
-<p>You're logged in already! <a href="/portal">go back</a> </p>
+<p>Bienvenido <a href="/portal/admins">ir a admin</a> </p>
 {% else %}
 <form action="login" method="POST" >
     {% csrf_token %}
