@@ -6,7 +6,7 @@
 # read for new requests by field marcado
 # marcado = 0 is new
 # marcado = 1 is not new
-# will generate emails and sent the requester on the field correo
+
 import mysql.connector
 import re
 import smtplib
@@ -93,8 +93,8 @@ class Obsr:
 
         sent_from = gmail_user  
         to = to  
-        subject = 'Su Correo Esta Listo'  
-        body = 'Hola su correo esta listo: ' + str(text)
+        subject = 'Solicitud de correo aceptada'  
+        body = ': ' + str(text)
 
         email_text = """\  
         From: %s  
@@ -104,7 +104,7 @@ class Obsr:
         """ % (sent_from, ", ".join(to), subject, body)
 
         try:  
-            server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
+            server = smtplib.SMTP_SSL('smtp.gmail.com', 587)
             server.ehlo()
             server.login(gmail_user, gmail_password)
             resp = server.sendmail(sent_from, to, email_text)
@@ -128,12 +128,19 @@ if __name__ == "__main__":
 		rpnedings = obr.getPendings()
 		print "executing " + str(len(rpnedings))
 		textemail = """
-			Favor de pasar al departamento de Centro de Computo despues de 
-			24 horas en un horario de 9am-12pm y de 1pm-3pm" + "Llevar con sigo una copia de su credencial de Estudiante"
+			Favor de pasar al departamento de Centro de Computo despues de 24 horas en un horario de 9am-12pm y de 1pm-3pm  Llevar con sigo una copia de su credencial de       Estudiante
 		"""
 		for r in rpnedings:
 			resp = obr.send_email(to = r[7],subject = "Tu solicitud de correo ha sido aceptada", text = textemail)
+            print resp
 			if resp:
 				obr.marcarComoCreado(r[0])	
-		time.sleep(60) # se va a dormir cada 300 segundos 5 minutos
+        print "finzalizado"
+		time.sleep(60) # se va a dormir cada 60 segundos
+
+
+
+
+
+
 

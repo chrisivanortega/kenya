@@ -91,6 +91,11 @@ def admins(request):
 
         doc.line(250,790,250,700)
         doc.line(450,790,450,700)
+        doc.line(450,770,590,770)
+        doc.setFont('Helvetica', 8)
+        doc.drawString(460,780 , 'Responsable: Centro de computo')
+        doc.line(450,750,590,750)
+        doc.line(450,730,590,730)
 
         # lineas divisorias
         doc.line(5,790,5,700)

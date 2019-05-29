@@ -45,7 +45,7 @@
     <script>
 
         function isValid(str){
-        return !/[~`!#$ñ%\^&*+=\-\[\]\\';,/{}|\\":<>\?]/g.test(str);
+        return !/[~`!#$ñáéíóú%\^&*+=\-\[\]\\';,/{}|\\":<>\?]/g.test(str);
         }
         
         $(function(){
@@ -65,7 +65,7 @@
                 
                 // Check if empty of not
                 if (isValid(name) ==  false){
-                    alert("nombre no valido: contiene algun caracter especial " + name)
+                    alert("Nombre no valido: No incluir acentos ni letra ñ " +"(" + name +")")
                     return false;
                 }
                 name = name.replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, '-')

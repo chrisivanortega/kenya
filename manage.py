@@ -1,4 +1,4 @@
-#!/home/cortega/env/bin/python2.7
+#!/home/servidor/env/bin/python2.7
 import os
 import sys
 
